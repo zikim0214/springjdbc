@@ -1,0 +1,17 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%kvp-
+                %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
+
+<!--
+스프링 부트 3.1 부터 기본 로그 레벨을 INFO 로 빠르게 설정하기 때문에 로그를 확인할 수 없는데,
+이렇게 하면 기본 로그 레벨을 DEBUG 로 설정해서 강의 내용과 같이 로그를 확인할 수 있다.
+-->
