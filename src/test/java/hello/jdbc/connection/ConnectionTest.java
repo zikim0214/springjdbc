@@ -15,6 +15,9 @@ import static hello.jdbc.connection.ConnectionConst.*;
 
 
 /**
+ * JDBC가 제공하는 DriverManager 는 라이브러리에 등록된 DB 드라이버들을 관리하고, 커넥션을 획득하
+ * 는 기능을 제공한다
+ * <p>
  * DriverManager 를 사용해서 커넥션을 획득하다가 HikariCP 같은
  * 커넥션 풀을 사용하도록 변경하면 커넥션을 획득하는 애플리케이션 코드도 함께 변경해야 한다
  * <p>
