@@ -72,7 +72,7 @@ class MemberServiceV1Test {
         Member memberEx = new Member(MEMBER_EX, 10000);
         memberRepository.save(memberA);
         memberRepository.save(memberEx);
-        //when
+        //when 예외가 발생하지 않으면 실패. 즉, 예외가 발생했을 때 다음으로 넘어간다.
         assertThatThrownBy(() ->
                 memberService.accountTransfer(memberA.getMemberId(), memberEx.getMemberId(),
                         2000))
