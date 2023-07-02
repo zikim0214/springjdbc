@@ -21,17 +21,17 @@ public class MemberServiceV2 {
 
     public void accountTransfer(String fromId, String toId, int money) throws SQLException {
 
-        Connection con = dataSource.getConnection();
+        Connection con = dataSource.getConnection(); // 트랜잭션을 시작하려면 커넥션이 필요
         try {
-            con.setAutoCommit(false); //트랜잭션 시작
-            //비즈니스 로직
+            con.setAutoCommit(false); // 수동커밋 > 트랜잭션 시작
+            // 비즈니스 로직
             bizLogic(con, fromId, toId, money);
-            con.commit(); //성공시 커밋
+            con.commit(); // 성공시 커밋
         } catch (Exception e) {
-            con.rollback(); //실패시 롤백
+            con.rollback(); // 실패시 롤백
             throw new IllegalStateException(e);
         } finally {
-            release(con);
+            release(con); // 커넥션을 모두 사용하고 나면 종료한다.. 커넥션 반납
         }
     }
 
@@ -54,7 +54,7 @@ public class MemberServiceV2 {
     private void release(Connection con) {
         if (con != null) {
             try {
-                con.setAutoCommit(true); //커넥션 풀 고려
+                con.setAutoCommit(true); // 풀에 반납 및 자동커밋 모드로 변경. 커넥션 풀 고려
                 con.close();
             } catch (Exception e) {
                 log.info("error", e);
